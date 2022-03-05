@@ -81,11 +81,6 @@ const Search: React.FC<any> = ({ cities }) => {
     );
   }, [cities, textValue]);
 
-  const showSuggestions: boolean = useMemo(
-    () => textValue.length > 0,
-    [textValue]
-  );
-
   const handleTextChange: React.ChangeEventHandler<HTMLInputElement> = (
     event
   ) => {
@@ -101,7 +96,6 @@ const Search: React.FC<any> = ({ cities }) => {
   const handleSelection = (selectionName: string) => (_event?: any) => {
     setTextValue(selectionName);
     setShowSelectionBox(false);
-    // there will be a callback to a selected cities context here.
     dispatch(fetchLatestMeasurements(selectionName));
   };
 

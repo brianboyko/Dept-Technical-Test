@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { normalizeBy } from "../../utils/normalizeBy";
 
-interface Measurement {
+export interface Measurement {
   lastUpdated: string;
   parameter: string;
   unit: string;
