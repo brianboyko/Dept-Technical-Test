@@ -2,11 +2,42 @@
 
 import { useMemo, useState } from "react";
 import SuggestionsList from "./SuggestionsList";
-import styled from 'styled-components';
+import styled from "styled-components";
+import Image from "next/image";
 
+const StyledSearchBox = styled.div`
+  display: flex;
+  width: 100%;
+  z-index: 1000;
+  position: absolute;
+  left: 0;
+  top: 0;
+  border-radius: 1rem;
+  padding: 0.5rem 1rem;
+  border: 2px solid #f0f0f0;
+  box-shadow: 2px 2px 10px -6px #000000;
+  background-color: #ffffff;
+  &:focus-within {
+    border: 2px solid #9999ff;
+  }
+`;
 const StyledInput = styled.input`
   color: black;
-`
+  width: 100%;
+  left: 0;
+  margin-left: 0.5rem;
+  top: 0;
+  font-size: 1.5rem;
+  border: 0;
+  &:focus {
+    outline: none;
+  }
+`;
+
+const StyledAutoCompleteContainer = styled.div`
+  position: relative;
+  width: 100%;
+`;
 
 const Search: React.FC<{ listOfCities: string[] }> = ({ listOfCities }) => {
   const [textValue, setTextValue] = useState<string>("");
@@ -21,15 +52,15 @@ const Search: React.FC<{ listOfCities: string[] }> = ({ listOfCities }) => {
   }, [listOfCities, textValue]);
 
   const showSuggestions: boolean = useMemo(
-    () => textValue.length > 3 && filteredSuggestions.length > 0,
-    [filteredSuggestions, textValue]
+    () => textValue.length > 0,
+    [textValue]
   );
 
   const handleTextChange: React.ChangeEventHandler<HTMLInputElement> = (
     event
   ) => {
     const userInput = event.target.value;
-    if (userInput.length > 3) {
+    if (userInput.length > 0) {
       setShowSelectionBox(true);
     }
     setTextValue(userInput);
@@ -41,39 +72,31 @@ const Search: React.FC<{ listOfCities: string[] }> = ({ listOfCities }) => {
     // there will be a callback to a selected cities context here.
     console.log("SELECTED:", selectionName);
   };
-  const handleKeyboardSelection: React.KeyboardEventHandler<HTMLLIElement> = (
-    event
-  ) => {
-    if (!showSelectionBox) {
-      return;
-    }
-    if (event.key === "ArrowUp") {
-      setKeyboardSelectionIndex((index) => Math.max(0, index - 1));
-    }
-    if (event.key === "ArrowDown") {
-      setKeyboardSelectionIndex((index) =>
-        Math.min(index + 1, filteredSuggestions.length)
-      );
-    }
-    if (event.key === "Enter") {
-      handleSelection(filteredSuggestions[keyboardSelectionIndex])();
-    }
-  };
-  const handleMouseOver = (selectionIndex: number) => (_event?: any) => {
-    setKeyboardSelectionIndex(selectionIndex);
-  };
 
   return (
-    <>
-      <StyledInput type="text" onChange={handleTextChange} />
-      <SuggestionsList
-        filteredSuggestions={filteredSuggestions}
-        keyboardSelectionIndex={keyboardSelectionIndex}
-        handleKeyboardSelection={handleKeyboardSelection}
-        handleSelection={handleSelection}
-        handleMouseOver={handleMouseOver}
-      />
-    </>
+    <StyledAutoCompleteContainer>
+      <StyledSearchBox>
+        <Image
+          width="36px"
+          height="36px"
+          src="/img/search_black_24dp.svg"
+          alt="search icon"
+        />
+        <StyledInput
+          tabIndex={0}
+          type="text"
+          value={textValue}
+          onChange={handleTextChange}
+        />
+      </StyledSearchBox>
+      {showSelectionBox && showSuggestions && (
+        <SuggestionsList
+          handleSelection={handleSelection}
+          filteredSuggestions={filteredSuggestions}
+          keyboardSelectionIndex={keyboardSelectionIndex}
+        />
+      )}
+    </StyledAutoCompleteContainer>
   );
 };
 
