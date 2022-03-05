@@ -1,17 +1,52 @@
 import type { NextPage } from "next";
+import { useContext } from "react";
 import Head from "next/head";
 import Header from "../components/Header";
 import Search from "../components/Search";
+import MeasurementCards from "../components/MeasurementCards";
 import styled from "styled-components";
+import { useState } from "react";
+import SelectionBoxProvider, {
+  SelectionBoxStateContext,
+} from "../contexts/SelectionBox";
 
-const StyledContainer = styled.div`
+const StyledMainArea = styled.main`
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
+  width: 100%;
 `;
 
-const Home: NextPage<{listOfCities: string[]}> = ({listOfCities}) => {
+const StyledHeadArea = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: calc(100% - 3rem);
+  max-width: 38rem;
+  margin-left: 1.5rem;
+  margin-right: 1.5rem;
+`;
+
+const StyledResultsArea = styled.section<{ showSelectionBox: boolean }>`
+  transition: transform 500ms ease-in-out;
+  transform: ${(props) =>
+    props.showSelectionBox
+      ? `translate3d(0, 24rem, 0)`
+      : `translate3d(0, 8rem, 0)`};
+  @media (max-width: 864px){
+    transform: ${(props) =>
+      props.showSelectionBox
+        ? `translate3d(0, 24rem, 0)`
+        : `translate3d(0, 4rem, 0)`};
+  }
+
+`;
+const Home: NextPage<{ cities: string[] }> = ({ cities }) => {
+  // this would normally be in the search component, but we can use this here
+  // to create a cool animation effect in the styled results area.
+  const [showSelector, setShowSelector] = useState<boolean>(false);
   return (
     <div>
       <Head>
@@ -22,13 +57,21 @@ const Home: NextPage<{listOfCities: string[]}> = ({listOfCities}) => {
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <StyledContainer>
-        <main>
-          <Header />
-          <Search listOfCities={listOfCities}/>
-        </main>
-      </StyledContainer>
-      <hr />
+      <SelectionBoxProvider>
+        <StyledMainArea>
+          <StyledHeadArea>
+            <Header />
+            <Search cities={cities} />
+          </StyledHeadArea>
+        </StyledMainArea>
+        <SelectionBoxStateContext.Consumer>
+          {({showSelectionBox}) => (
+            <StyledResultsArea showSelectionBox={showSelectionBox} id="results">
+              <MeasurementCards />
+            </StyledResultsArea>
+          )}
+        </SelectionBoxStateContext.Consumer>
+      </SelectionBoxProvider>
     </div>
   );
 };
@@ -44,12 +87,13 @@ const Home: NextPage<{listOfCities: string[]}> = ({listOfCities}) => {
 
 export async function getStaticProps() {
   // we hit our own local API instead of hitting the external API to ensure CORS compatability.
-  const listOfCities = await fetch(`${process.env.SELF_HOST}/api/cities`).then((res) => res.json());
+  const cities = await fetch(`${process.env.SELF_HOST}/api/cities`).then(
+    (res) => res.json()
+  );
   return {
-    props: { listOfCities },
+    props: { cities },
     revalidate: 60, // this function will not run more than once every 60 seconds;
   };
 }
-
 
 export default Home;

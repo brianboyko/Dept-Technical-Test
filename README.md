@@ -40,7 +40,11 @@ Secondly, a more personal reason - when I do these technical tests, which can be
 
 The third - and the biggest - is that this uses a third party API, and there are CORS issues with trying to grab that API data and run it in localhost.  A "neat trick" of Next.js is that we can use Next.js's built in API to fetch the data we want, and then re-fetch that data from the Next.js API.  
 
+### ReduxJS/Toolkit
 
+Redux is overkill for this project - most of the information could be handled via React's built in Context API. However, there are two reasons I choose Redux here - the first is that most production codebases are better served with Redux than with the Context API, because most production projects are much, much larger - Context API, if not used well, can result in a lot of unnecessary re-renders that can be avoided "out of the box" with Redux Toolkit. 
+
+Secondly, I find Redux easier to test than most other state management solutions, including the context API.
 # Before Execution
 
 This project requires local environment variables to be defined:

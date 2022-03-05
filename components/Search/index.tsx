@@ -1,9 +1,15 @@
 /* Note: Thanks to https://blog.logrocket.com/build-react-autocomplete-component/ for the basics. */
 
-import { useMemo, useState } from "react";
-import SuggestionsList from "./SuggestionsList";
+import { useMemo, useState, useContext } from "react";
 import styled from "styled-components";
 import Image from "next/image";
+import SuggestionsList from "./SuggestionsList";
+import { fetchLatestMeasurements } from "../../store/modules/measurements";
+import { useDispatch } from "react-redux";
+import {
+  SelectionBoxDispatchContext,
+  SelectionBoxStateContext,
+} from "../../contexts/SelectionBox";
 
 const StyledSearchBox = styled.div`
   display: flex;
@@ -37,19 +43,43 @@ const StyledInput = styled.input`
 const StyledAutoCompleteContainer = styled.div`
   position: relative;
   width: 100%;
+  @media (max-width: 864px) {
+    width: 24rem;
+  }
 `;
 
-const Search: React.FC<{ listOfCities: string[] }> = ({ listOfCities }) => {
+/* What's going on here? This is one of the "gotchas" of using the Context API
+   and one of the reasons I love Redux. Without memoization, the two context
+   values here might not change their internals, but the *pointers* to those
+   internals *will*.  What that means is that 'setShowSelectionBox(true)' will
+   trigger a rerender even if showSelectionBox already equals true.
+   
+   To combat this, I take the contexts, and put it in a custom hook which
+   uses useMemo.  useMemo will only compare the *value* of showSelectionBox
+   when deciding if the hook needs to trigger a re-render. 
+*/
+const useMemoizedSelectionBoxContext = () => {
+  const { setShowSelectionBox } = useContext(SelectionBoxDispatchContext);
+  const { showSelectionBox } = useContext(SelectionBoxStateContext);
+  return useMemo(
+    () => ({ setShowSelectionBox, showSelectionBox }),
+    [setShowSelectionBox, showSelectionBox]
+  );
+};
+
+const Search: React.FC<any> = ({ cities }) => {
+  const {setShowSelectionBox, showSelectionBox} = useMemoizedSelectionBoxContext();
   const [textValue, setTextValue] = useState<string>("");
-  const [showSelectionBox, setShowSelectionBox] = useState<boolean>(false);
   const [keyboardSelectionIndex, setKeyboardSelectionIndex] =
     useState<number>(0);
 
+  const dispatch = useDispatch();
+
   const filteredSuggestions: string[] = useMemo(() => {
-    return listOfCities.filter((city) =>
+    return cities.filter((city: string) =>
       city.toLowerCase().includes(textValue.toLowerCase())
     );
-  }, [listOfCities, textValue]);
+  }, [cities, textValue]);
 
   const showSuggestions: boolean = useMemo(
     () => textValue.length > 0,
@@ -62,6 +92,8 @@ const Search: React.FC<{ listOfCities: string[] }> = ({ listOfCities }) => {
     const userInput = event.target.value;
     if (userInput.length > 0) {
       setShowSelectionBox(true);
+    } else {
+      setShowSelectionBox(false);
     }
     setTextValue(userInput);
   };
@@ -70,7 +102,7 @@ const Search: React.FC<{ listOfCities: string[] }> = ({ listOfCities }) => {
     setTextValue(selectionName);
     setShowSelectionBox(false);
     // there will be a callback to a selected cities context here.
-    console.log("SELECTED:", selectionName);
+    dispatch(fetchLatestMeasurements(selectionName));
   };
 
   return (
@@ -89,7 +121,7 @@ const Search: React.FC<{ listOfCities: string[] }> = ({ listOfCities }) => {
           onChange={handleTextChange}
         />
       </StyledSearchBox>
-      {showSelectionBox && showSuggestions && (
+      {showSelectionBox && (
         <SuggestionsList
           handleSelection={handleSelection}
           filteredSuggestions={filteredSuggestions}
