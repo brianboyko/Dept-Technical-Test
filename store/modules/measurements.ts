@@ -1,5 +1,5 @@
-import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { normalizeBy } from "../../utils/normalizeBy";
+import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { normalizeBy } from '../../utils/normalizeBy';
 
 export interface Measurement {
   lastUpdated: string;
@@ -14,7 +14,7 @@ export interface LocalMeasurement {
     latitude: number;
     longitude: number;
   };
-  country: "GB";
+  country: 'GB';
   measurements: Measurement[];
 }
 interface MeasurementState {
@@ -26,11 +26,11 @@ interface MeasurementState {
 const initialState: MeasurementState = {
   data: {},
   isLoading: false,
-  errMsg: "",
+  errMsg: '',
 };
 
 export const measurementSlice = createSlice({
-  name: "measurements",
+  name: 'measurements',
   initialState,
   reducers: {
     // Redux toolkit uses immer under the hood so
@@ -40,7 +40,7 @@ export const measurementSlice = createSlice({
       state: MeasurementState,
       action: PayloadAction<LocalMeasurement[]>
     ) => {
-      const normalized = normalizeBy(action.payload, "location");
+      const normalized = normalizeBy(action.payload, 'location');
       Object.assign(state.data, normalized);
     },
     removeLocation: (
@@ -57,16 +57,21 @@ export const measurementSlice = createSlice({
       state.errMsg = action.payload;
     },
     clearErrMsg: (state: MeasurementState) => {
-      state.errMsg = "";
+      state.errMsg = '';
     },
   },
 });
 
-export const { addLocations, removeLocation, setIsLoading, setErrMsg, clearErrMsg } =
-  measurementSlice.actions;
+export const {
+  addLocations,
+  removeLocation,
+  setIsLoading,
+  setErrMsg,
+  clearErrMsg,
+} = measurementSlice.actions;
 
 export const fetchLatestMeasurements = createAsyncThunk(
-  "measurements/fetchLatestStatus",
+  'measurements/fetchLatestStatus',
   async (cityName: string, thunkAPI) => {
     const { dispatch } = thunkAPI;
     dispatch(setIsLoading(true));

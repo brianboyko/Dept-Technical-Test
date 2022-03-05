@@ -1,15 +1,15 @@
 /* Note: Thanks to https://blog.logrocket.com/build-react-autocomplete-component/ for the basics. */
 
-import { useMemo, useState, useContext } from "react";
-import styled from "styled-components";
-import Image from "next/image";
-import SuggestionsList from "./SuggestionsList";
-import { fetchLatestMeasurements } from "../../store/modules/measurements";
-import { useDispatch } from "react-redux";
+import { useMemo, useState, useContext } from 'react';
+import styled from 'styled-components';
+import Image from 'next/image';
+import SuggestionsList from './SuggestionsList';
+import { fetchLatestMeasurements } from '../../store/modules/measurements';
+import { useDispatch } from 'react-redux';
 import {
   SelectionBoxDispatchContext,
   SelectionBoxStateContext,
-} from "../../contexts/SelectionBox";
+} from '../../contexts/SelectionBox';
 
 const StyledSearchBox = styled.div`
   display: flex;
@@ -68,8 +68,9 @@ const useMemoizedSelectionBoxContext = () => {
 };
 
 const Search: React.FC<any> = ({ cities }) => {
-  const {setShowSelectionBox, showSelectionBox} = useMemoizedSelectionBoxContext();
-  const [textValue, setTextValue] = useState<string>("");
+  const { setShowSelectionBox, showSelectionBox } =
+    useMemoizedSelectionBoxContext();
+  const [textValue, setTextValue] = useState<string>('');
   const [keyboardSelectionIndex, setKeyboardSelectionIndex] =
     useState<number>(0);
 

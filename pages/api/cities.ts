@@ -1,11 +1,11 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-import type { NextApiRequest, NextApiResponse } from "next";
+import type { NextApiRequest, NextApiResponse } from 'next';
 
-const citiesURL = "https://docs.openaq.org/v2/cities?country=GB&limit=200";
+const citiesURL = 'https://docs.openaq.org/v2/cities?country=GB&limit=200';
 
 const getCities = async () => {
   const json = await fetch(citiesURL, {
-    method: "GET",
+    method: 'GET',
   }).then((response) => response.json());
 
   const listOfCities = json.results.map(({ city }: any): string => city);

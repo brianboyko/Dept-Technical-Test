@@ -1,12 +1,12 @@
-import { useMemo } from "react";
+import { useMemo } from 'react';
 import Image from 'next/image';
-import styled from "styled-components";
-import humanizeTime from "../../utils/humanizeTime";
-import parseISO from "date-fns/parseISO";
-import compareAsc from "date-fns/compareAsc";
-import { LocalMeasurement } from "../../store/modules/measurements";
-import { useDispatch } from "react-redux";
-import { removeLocation } from "../../store/modules/measurements";
+import styled from 'styled-components';
+import humanizeTime from '../../utils/humanizeTime';
+import parseISO from 'date-fns/parseISO';
+import compareAsc from 'date-fns/compareAsc';
+import { LocalMeasurement } from '../../store/modules/measurements';
+import { useDispatch } from 'react-redux';
+import { removeLocation } from '../../store/modules/measurements';
 
 const StyledMeasurementCard = styled.div`
   position: relative;
@@ -65,7 +65,7 @@ const MeasurementCard = ({
       return prev;
     }, parseISO(measurements[0].lastUpdated));
     const longHumanTime = humanizeTime(timeUpdated);
-    return longHumanTime.split(",").slice(0, 2).join(",");
+    return longHumanTime.split(',').slice(0, 2).join(',');
   }, [measurements]);
 
   const handleDeletion = () => {
@@ -78,7 +78,7 @@ const MeasurementCard = ({
         (entry: any) =>
           `${entry.parameter.toUpperCase()}: ${entry.value}${entry.unit}`
       )
-      .join(", ");
+      .join(', ');
   }, [measurements]);
   return (
     <StyledMeasurementCard>
@@ -93,7 +93,7 @@ const MeasurementCard = ({
       <StyledTimeLine>Updated {lastUpdated} ago</StyledTimeLine>
       <StyledLocation>{location}</StyledLocation>
       <StyledSubLocation>
-        in {city}, {country === "GB" ? "United Kingdom" : country}
+        in {city}, {country === 'GB' ? 'United Kingdom' : country}
       </StyledSubLocation>
       <StyledValues>Values: {formattedValues}</StyledValues>
     </StyledMeasurementCard>

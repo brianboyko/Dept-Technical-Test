@@ -1,7 +1,7 @@
-import { useSelector } from "react-redux";
-import type { RootState } from "../../store";
-import styled from "styled-components";
-import MeasurementCard from "./MeasurementCard";
+import { useSelector } from 'react-redux';
+import type { RootState } from '../../store';
+import styled from 'styled-components';
+import MeasurementCard from './MeasurementCard';
 
 const StyledCardContainer = styled.div`
   display: flex;
@@ -9,8 +9,6 @@ const StyledCardContainer = styled.div`
   justify-content: center;
   max-width: 100rem;
 `;
-
-
 
 const MeasurementCards = () => {
   const cards = useSelector((state: RootState) => {

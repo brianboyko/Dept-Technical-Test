@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 const StyledSuggestion = styled.li<{ selected: boolean }>`
   background-color: #ffffff;
@@ -51,7 +51,7 @@ export const SuggestionsList: React.FC<SuggestionListProps> = ({
   const handleKeyDown =
     (selectionName: string): React.KeyboardEventHandler<HTMLLIElement> =>
     (event) => {
-      if (event.key === "Enter") {
+      if (event.key === 'Enter') {
         handleSelection(selectionName)();
       }
     };
@@ -61,7 +61,7 @@ export const SuggestionsList: React.FC<SuggestionListProps> = ({
         <StyledSuggestion
           key={selectionName}
           className={`city-option ${
-            keyboardSelectionIndex === index ? "selected" : ""
+            keyboardSelectionIndex === index ? 'selected' : ''
           }`}
           selected={keyboardSelectionIndex === index}
           onClick={handleSelection(selectionName)}
@@ -73,7 +73,7 @@ export const SuggestionsList: React.FC<SuggestionListProps> = ({
       ))}
     </StyledSuggestionList>
   ) : (
-    <StyledNoCities className={"no-city-options"}>
+    <StyledNoCities className={'no-city-options'}>
       No cities match your input text.
     </StyledNoCities>
   );

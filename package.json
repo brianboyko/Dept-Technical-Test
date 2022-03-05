@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "test": "jest --watch"
+    "test": "jest --watch",
+    "prettier": "prettier --write '(components|contexts|pages|store|utils)/**/*.(ts|tsx|js)'"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.8.0",
@@ -15,6 +16,7 @@
     "humanize-duration": "^3.27.1",
     "next": "12.1.0",
     "next-absolute-url": "^1.2.2",
+    "prettier": "^2.5.1",
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "react-redux": "^7.2.6",

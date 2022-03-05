@@ -1,14 +1,14 @@
-import type { NextPage } from "next";
-import { useContext } from "react";
-import Head from "next/head";
-import Header from "../components/Header";
-import Search from "../components/Search";
-import MeasurementCards from "../components/MeasurementCards";
-import styled from "styled-components";
-import { useState } from "react";
+import type { NextPage } from 'next';
+import { useContext } from 'react';
+import Head from 'next/head';
+import Header from '../components/Header';
+import Search from '../components/Search';
+import MeasurementCards from '../components/MeasurementCards';
+import styled from 'styled-components';
+import { useState } from 'react';
 import SelectionBoxProvider, {
   SelectionBoxStateContext,
-} from "../contexts/SelectionBox";
+} from '../contexts/SelectionBox';
 
 const StyledMainArea = styled.main`
   display: flex;
@@ -35,13 +35,12 @@ const StyledResultsArea = styled.section<{ showSelectionBox: boolean }>`
     props.showSelectionBox
       ? `translate3d(0, 24rem, 0)`
       : `translate3d(0, 8rem, 0)`};
-  @media (max-width: 864px){
+  @media (max-width: 864px) {
     transform: ${(props) =>
       props.showSelectionBox
         ? `translate3d(0, 24rem, 0)`
         : `translate3d(0, 4rem, 0)`};
   }
-
 `;
 const Home: NextPage<{ cities: string[] }> = ({ cities }) => {
   // this would normally be in the search component, but we can use this here
@@ -65,7 +64,7 @@ const Home: NextPage<{ cities: string[] }> = ({ cities }) => {
           </StyledHeadArea>
         </StyledMainArea>
         <SelectionBoxStateContext.Consumer>
-          {({showSelectionBox}) => (
+          {({ showSelectionBox }) => (
             <StyledResultsArea showSelectionBox={showSelectionBox} id="results">
               <MeasurementCards />
             </StyledResultsArea>

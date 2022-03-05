@@ -1,14 +1,22 @@
 /* This is mainly to demonstrate that I also know how to use the Context API */
 
-import { createContext, Dispatch, ReactNode, SetStateAction, useState } from "react";
+import {
+  createContext,
+  Dispatch,
+  ReactNode,
+  SetStateAction,
+  useState,
+} from 'react';
 
 type noop = () => void;
 
 export const SelectionBoxStateContext = createContext({
   showSelectionBox: false,
 });
-export const SelectionBoxDispatchContext = createContext<{setShowSelectionBox: noop | Dispatch<SetStateAction<boolean>>}>({
-  setShowSelectionBox: () => {}
+export const SelectionBoxDispatchContext = createContext<{
+  setShowSelectionBox: noop | Dispatch<SetStateAction<boolean>>;
+}>({
+  setShowSelectionBox: () => {},
 });
 
 export const SelectionBoxProvider = ({ children }: { children: ReactNode }) => {
