@@ -36,6 +36,10 @@ const Home: NextPage<{listOfCities: string[]}> = ({listOfCities}) => {
 /* since the list of cities is unlikely to change anytime soon, this can be gathered statically,
     with incremental static regeneration. In other words, this is a statically generated page,
     that rebuilds at most once every 60 seconds. 
+
+    Since this list is cached, it also ensures that the list of cities - which again, rarely changes - 
+    will still be available if the cities endpoint on the 3rd party API goes down. 
+    
     See https://nextjs.org/docs/basic-features/data-fetching/incremental-static-regeneration for more info. */
 
 export async function getStaticProps() {
