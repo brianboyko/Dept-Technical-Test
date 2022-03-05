@@ -6,7 +6,13 @@ export const store = configureStore({
   reducer: {
     measurements: measurementsReducer,
   },
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
+  middleware: (getDefaultMiddleware) => {
+    const defaultMiddleware = getDefaultMiddleware();
+    if (process.env.NODE_ENV === 'development') {
+      defaultMiddleware.push(logger);
+    }
+    return defaultMiddleware;
+  },
 });
 
 export type RootState = ReturnType<typeof store.getState>;

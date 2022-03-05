@@ -10,11 +10,11 @@ export interface Measurement {
 export interface LocalMeasurement {
   location: string;
   city: string;
-  coordinates: {
-    latitude: number;
-    longitude: number;
-  };
-  country: 'GB';
+  coordinates?: {
+    latitude: number | null;
+    longitude: number | null;
+  } | null;
+  country: string;
   measurements: Measurement[];
 }
 interface MeasurementState {

@@ -6,3 +6,5 @@ export const normalizeBy = <T extends Record<string, any>>(
     pv[cv[key]] = cv;
     return pv;
   }, {});
+
+export default normalizeBy;
