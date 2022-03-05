@@ -34,9 +34,18 @@ Typescript is chosen because it's ability to 'document as you code' and to allow
 
 ### Next.js
 
-There are two reasons for using Next.js here. The first is performance - while there will be client-side API calls (as is the nature of the application), there needs to be at least one API call before the application can produce anything performant - the list of towns available. This should reduce time-to-interactivity slightly. 
+There are two reasons for using Next.js here. The first is performance - while there will be client-side API calls (as is the nature of the application), there needs to be at least one API call before the application can produce anything performant - the list of towns available - which can be done server-side. This should reduce time-to-interactivity slightly. 
 
 Secondly, a more personal reason - when I do these technical tests, which can be repetitive, I always try to do something new with each. In this case, it would be the inclusion of Next.js.  While I have worked with Next.js before, I don't have anything on my Github to reflect that - this seems like a good opportunity to do so. 
+
+The third - and the biggest - is that this uses a third party API, and there are CORS issues with trying to grab that API data and run it in localhost.  A "neat trick" of Next.js is that we can use Next.js's built in API to fetch the data we want, and then re-fetch that data from the Next.js API.  
+
+
+# Before Execution
+
+This project requires local environment variables to be defined:
+
+SELF_HOST: {the url origin of the host it is on. If running on localhost:3000 for example, it should be set to 'http://localhost:3000'}
 # Next.JS Documentation
 
 ## Getting Started
