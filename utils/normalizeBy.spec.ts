@@ -21,44 +21,43 @@ describe('utils/normalizeBy()', () => {
       'Thurrock',
       'Tower Hamlets Roadside',
     ]);
-    expect(result['Google Street View Car']).toEqual( {
-        "city": "London",
-        "coordinates": null,
-        "country": "GB",
-        "location": "Google Street View Car",
-        "measurements":  [
-           {
-            "lastUpdated": "2019-10-05T16:19:13+00:00",
-            "parameter": "no",
-            "unit": "ppm",
-            "value": 0.026888,
-          },
-           {
-            "lastUpdated": "2019-10-28T20:12:27+00:00",
-            "parameter": "co2",
-            "unit": "ppm",
-            "value": 429.471,
-          },
-           {
-            "lastUpdated": "2019-10-28T20:12:27+00:00",
-            "parameter": "no2",
-            "unit": "ppm",
-            "value": 0.016766,
-          },
-           {
-            "lastUpdated": "2019-10-05T16:19:13+00:00",
-            "parameter": "nox",
-            "unit": "µg/m³",
-            "value": 81.2461538461538,
-          },
-           {
-            "lastUpdated": "2019-10-28T20:12:27+00:00",
-            "parameter": "pm25",
-            "unit": "µg/m³",
-            "value": 10.42832,
-          },
-        ],
-      }
-    );
+    expect(result['Google Street View Car']).toEqual({
+      city: 'London',
+      coordinates: null,
+      country: 'GB',
+      location: 'Google Street View Car',
+      measurements: [
+        {
+          lastUpdated: '2019-10-05T16:19:13+00:00',
+          parameter: 'no',
+          unit: 'ppm',
+          value: 0.026888,
+        },
+        {
+          lastUpdated: '2019-10-28T20:12:27+00:00',
+          parameter: 'co2',
+          unit: 'ppm',
+          value: 429.471,
+        },
+        {
+          lastUpdated: '2019-10-28T20:12:27+00:00',
+          parameter: 'no2',
+          unit: 'ppm',
+          value: 0.016766,
+        },
+        {
+          lastUpdated: '2019-10-05T16:19:13+00:00',
+          parameter: 'nox',
+          unit: 'µg/m³',
+          value: 81.2461538461538,
+        },
+        {
+          lastUpdated: '2019-10-28T20:12:27+00:00',
+          parameter: 'pm25',
+          unit: 'µg/m³',
+          value: 10.42832,
+        },
+      ],
+    });
   });
 });
