@@ -7,8 +7,11 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "test": "jest --watch",
-    "prettier": "prettier --write '(components|contexts|pages|store|utils)/**/*.(ts|tsx|js)'"
+    "test:unit": "jest --watch",
+    "cypress:open": "cypress open",
+    "cypress:run": "cypress run",
+    "test": "jest && cypress run",
+    "prettier": "prettier --write '(components|contexts|pages|store|utils|cypress)/**/*.(ts|tsx|js)'"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.8.0",
@@ -31,6 +34,7 @@
     "@types/react": "17.0.39",
     "@types/redux-logger": "^3.0.9",
     "@types/styled-components": "^5.1.24",
+    "cypress": "^9.5.1",
     "eslint": "8.10.0",
     "eslint-config-next": "12.1.0",
     "eslint-config-prettier": "^8.5.0",

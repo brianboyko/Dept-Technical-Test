@@ -7,14 +7,14 @@ const StyledSubheading = styled.h2`
 `;
 
 const Subheading = () => (
-  <>
+  <div data-cy="styled-subheading">
     <StyledSubheading>
       Compare the air quality between cities in the UK.
     </StyledSubheading>
     <StyledSubheading>
       Select cities to compare using the search tool below.
     </StyledSubheading>
-  </>
+  </div>
 );
 
 export default Subheading;

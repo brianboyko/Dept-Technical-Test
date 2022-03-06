@@ -101,7 +101,7 @@ const Search: React.FC<any> = ({ cities }) => {
   };
 
   return (
-    <StyledAutoCompleteContainer>
+    <StyledAutoCompleteContainer data-cy="auto-complete-container">
       <StyledSearchBox>
         <Image
           width="36px"
@@ -110,6 +110,7 @@ const Search: React.FC<any> = ({ cities }) => {
           alt="search icon"
         />
         <StyledInput
+          data-cy="auto-complete-input"
           tabIndex={0}
           type="text"
           value={textValue}

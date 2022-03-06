@@ -56,9 +56,13 @@ export const SuggestionsList: React.FC<SuggestionListProps> = ({
       }
     };
   return filteredSuggestions.length ? (
-    <StyledSuggestionList className="city-options">
+    <StyledSuggestionList
+      data-cy="styled-selection-list"
+      className="city-options"
+    >
       {filteredSuggestions.map((selectionName, index) => (
         <StyledSuggestion
+          data-cy={`styled-selection-${selectionName}`}
           key={selectionName}
           className={`city-option ${
             keyboardSelectionIndex === index ? 'selected' : ''

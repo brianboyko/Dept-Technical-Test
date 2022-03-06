@@ -8,7 +8,9 @@ import { LocalMeasurement } from '../../store/modules/measurements';
 import { useDispatch } from 'react-redux';
 import { removeLocation } from '../../store/modules/measurements';
 
-const StyledMeasurementCard = styled.div`
+const StyledMeasurementCard = styled.div.attrs({
+  className: 'measurement-card',
+})`
   position: relative;
   background-color: #ffffff;
   padding: 2rem;
@@ -81,8 +83,11 @@ const MeasurementCard = ({
       .join(', ');
   }, [measurements]);
   return (
-    <StyledMeasurementCard>
-      <StyledRemove onClick={handleDeletion}>
+    <StyledMeasurementCard data-cy={`measurement-card-${location}`}>
+      <StyledRemove
+        data-cy={`measurement-card-remove-button-${location}`}
+        onClick={handleDeletion}
+      >
         <Image
           width="36px"
           height="36px"

@@ -5,6 +5,8 @@ const StyledHeading = styled.h1`
   font-weight: 600;
 `;
 
-const Heading = () => <StyledHeading>Compare your Air</StyledHeading>;
+const Heading = () => (
+  <StyledHeading data-cy="styled-heading">Compare your Air</StyledHeading>
+);
 
 export default Heading;
