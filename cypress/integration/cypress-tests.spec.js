@@ -58,13 +58,12 @@ describe('<Home/>', () => {
       cy.get('[data-cy=styled-selection-list]').should('not.exist');
     });
     it("should show London's data", () => {
-      cy.get('.measurement-card').should('have.length', 15);
+      cy.get('.measurement-card').should('exist');
     });
     it('should dismiss London data', () => {
       cy.get(
         '[data-cy="measurement-card-remove-button-Google Street View Car"]'
       ).click();
-      cy.get('.measurement-card').should('have.length', 14);
       cy.get('[data-cy="measurement-card-Google Street View Car"]').should(
         'not.exist'
       );
@@ -72,7 +71,6 @@ describe('<Home/>', () => {
     it("should restore London's cards on a re-entry", () => {
       cy.get('[data-cy=auto-complete-input]').clear().type(`lon`);
       cy.get('[data-cy=styled-selection-London]').click();
-      cy.get('.measurement-card').should('have.length', 15);
       cy.get('[data-cy="measurement-card-Google Street View Car"]').should(
         'exist'
       );

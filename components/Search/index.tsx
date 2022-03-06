@@ -94,6 +94,14 @@ const Search: React.FC<any> = ({ cities }) => {
     setTextValue(userInput);
   };
 
+  const handleKeyDown: React.KeyboardEventHandler<HTMLInputElement> = (event) => {
+    if(event.key === 'Enter'){
+      if(filteredSuggestions.length === 1){
+        handleSelection(filteredSuggestions[0])()
+      }
+    }
+  }
+
   const handleSelection = (selectionName: string) => (_event?: any) => {
     setTextValue(selectionName);
     setShowSelectionBox(false);
@@ -114,6 +122,7 @@ const Search: React.FC<any> = ({ cities }) => {
           tabIndex={0}
           type="text"
           value={textValue}
+          onKeyDown={handleKeyDown}
           onChange={handleTextChange}
         />
       </StyledSearchBox>

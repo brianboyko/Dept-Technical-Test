@@ -4,6 +4,26 @@ This is a technical take home test for a front-end developer role at Dept.
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
+# Installation
+
+For local installation, run the following commands:
+
+For NPM, 
+```bash
+$ npm i
+$ npm run build
+$ npm run start
+```
+
+For Yarn
+```bash
+$ yarn
+$ yarn build
+$ yarn start
+```
+
+This should run the 
+
 ## Specifications 
 
 * Recreate the design of the provided PDF as closely as possible.
@@ -45,42 +65,3 @@ The third - and the biggest - is that this uses a third party API, and there are
 Redux is overkill for this project - most of the information could be handled via React's built in Context API. However, there are two reasons I choose Redux here - the first is that most production codebases are better served with Redux than with the Context API, because most production projects are much, much larger - Context API, if not used well, can result in a lot of unnecessary re-renders that can be avoided "out of the box" with Redux Toolkit. 
 
 Secondly, I find Redux easier to test than most other state management solutions, including the context API.
-# Before Execution
-
-This project requires local environment variables to be defined:
-
-SELF_HOST: {the url origin of the host it is on. If running on localhost:3000 for example, it should be set to 'http://localhost:3000'}
-# Next.JS Documentation
-
-## Getting Started
-
-First, run the development server:
-
-```bash
-npm run dev
-# or
-yarn dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
-
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
-
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.

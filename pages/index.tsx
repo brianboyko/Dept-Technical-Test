@@ -85,10 +85,16 @@ const Home: NextPage<{ cities: string[] }> = ({ cities }) => {
     See https://nextjs.org/docs/basic-features/data-fetching/incremental-static-regeneration for more info. */
 
 export async function getStaticProps() {
-  // we hit our own local API instead of hitting the external API to ensure CORS compatability.
-  const cities = await fetch(`${process.env.SELF_HOST}/api/cities`).then(
-    (res) => res.json()
-  );
+  const citiesURL = 'https://docs.openaq.org/v2/cities?country=GB&limit=200';
+  /* Oh, one more cool thing. Since getStaticProps() runs only on the server,
+     and never in the client, we don't have to worry about CORS issues and
+     can ping the API directly. */
+  const json = await fetch(citiesURL, {
+    method: 'GET',
+  }).then((response) => response.json());
+
+  const cities = json.results.map(({ city }: any): string => city);
+
   return {
     props: { cities },
     revalidate: 60, // this function will not run more than once every 60 seconds;
